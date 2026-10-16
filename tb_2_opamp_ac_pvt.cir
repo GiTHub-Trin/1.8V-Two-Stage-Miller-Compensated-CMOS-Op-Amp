@@ -1,0 +1,49 @@
+* TB2: Two-Stage Miller Op-Amp Open-Loop AC & PVT Corner Testbench
+.include cmos180nm.lib
+
+* --- Design Parameters (gm/Id Sized) ---
+.param VDD_VAL = 1.8
+.param VCM_VAL = 0.9
+.param IREF_VAL = 35u
+.param CC_VAL = 3.0p
+.param RZ_VAL = 238
+.param CL_VAL = 10.0p
+
+* --- Supplies & Bias Reference ---
+VDD vdd 0 DC {VDD_VAL}
+VIP inp 0 DC {VCM_VAL}
+IREF vdd nbias DC {IREF_VAL}
+
+* --- DC Closed-Loop / AC Open-Loop Injection Network ---
+LFB out inm 1T
+CFB inm nin_ac 1T
+VAC nin_ac inp DC 0 AC 1
+
+* --- Stage 1: Diff Pair (M1, M2) + Active Mirror Load (M3, M4) ---
+M1 n1 inp ntail 0 NMOS_180 W=3.5u L=0.8u M=4
+M2 n2 inm ntail 0 NMOS_180 W=3.5u L=0.8u M=4
+M3 n1 n1 vdd vdd PMOS_180 W=8.75u L=0.6u M=2
+M4 n2 n1 vdd vdd PMOS_180 W=8.75u L=0.6u M=2
+
+* --- Stage 2: Common-Source Amplifier (M6) + Current Sink (M7) ---
+M6 out n2 vdd vdd PMOS_180 W=8.75u L=0.6u M=20
+M7 out nbias 0 0 NMOS_180 W=10.0u L=1.0u M=10
+
+* --- Tail & Reference Current Mirror (M5, M8) ---
+M5 ntail nbias 0 0 NMOS_180 W=10.0u L=1.0u M=2
+M8 nbias nbias 0 0 NMOS_180 W=10.0u L=1.0u M=1
+
+* --- Miller Compensation & Load ---
+RZ n2 n_comp {RZ_VAL}
+CC n_comp out {CC_VAL}
+CL out 0 {CL_VAL}
+
+* --- Simulation & Corner Sweep (-40C, 27C, 125C) ---
+.ac dec 100 1 1G
+.step temp list -40 27 125
+
+* --- Automated LTspice Verification Measurements (View -> SPICE Error Log) ---
+.meas AC DC_Gain_dB MAX mag(V(out))
+.meas AC UGB_Hz WHEN mag(V(out))=1
+.meas AC Phase_Margin_deg FIND ph(V(out)) WHEN mag(V(out))=1
+.end

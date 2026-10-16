@@ -1,0 +1,31 @@
+* TB3: Unity-Gain Closed-Loop Step Response & Slew Rate Testbench
+.include cmos180nm.lib
+
+VDD vdd 0 DC 1.8
+IREF vdd nbias DC 35u
+VIN inp 0 PULSE(0.65 1.15 50n 1n 1n 400n 800n)
+
+* --- Two-Stage Op-Amp Connected in Unity-Gain Feedback (inm = out) ---
+M1 n1 inp ntail 0 NMOS_180 W=3.5u L=0.8u M=4
+M2 n2 out ntail 0 NMOS_180 W=3.5u L=0.8u M=4
+M3 n1 n1 vdd vdd PMOS_180 W=8.75u L=0.6u M=2
+M4 n2 n1 vdd vdd PMOS_180 W=8.75u L=0.6u M=2
+M6 out n2 vdd vdd PMOS_180 W=8.75u L=0.6u M=20
+M7 out nbias 0 0 NMOS_180 W=10.0u L=1.0u M=10
+M5 ntail nbias 0 0 NMOS_180 W=10.0u L=1.0u M=2
+M8 nbias nbias 0 0 NMOS_180 W=10.0u L=1.0u M=1
+RZ n2 n_comp 238
+CC n_comp out 3.0p
+CL out 0 10.0p
+
+.tran 0 900n 0 0.2n
+.meas TRAN V_10 FIND V(out) AT 50n
+.meas TRAN T_20 WHEN V(out)=0.75 RISE=1
+.meas TRAN T_80 WHEN V(out)=1.05 RISE=1
+.meas TRAN SR_Rise_V_us PARAM (1.05-0.75)/((T_80-T_20)*1e6)
+.meas TRAN T_80F WHEN V(out)=1.05 FALL=1
+.meas TRAN T_20F WHEN V(out)=0.75 FALL=1
+.meas TRAN SR_Fall_V_us PARAM (1.05-0.75)/((T_20F-T_80F)*1e6)
+.meas TRAN V_Peak MAX V(out) FROM 50n TO 400n
+.meas TRAN Overshoot_Pct PARAM ((V_Peak-1.15)/0.50)*100
+.end

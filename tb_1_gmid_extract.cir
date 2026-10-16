@@ -1,0 +1,17 @@
+* TB1: gm/Id, JD, and Intrinsic Gain Extraction in LTspice
+.include cmos180nm.lib
+.param VGS_SWEEP = 0.55
+
+Vdd vdd 0 DC 1.8
+Vgs ng 0 DC {VGS_SWEEP}
+Vds nd 0 DC 0.6
+Vsb vdd ps DC {VGS_SWEEP}
+Vsdp vdd pd DC 0.6
+
+* Unit Test Devices (W = 10um)
+Mn1 nd ng 0 0 NMOS_180 W=10u L=0.8u
+Mp1 pd ps vdd vdd PMOS_180 W=10u L=0.6u
+
+.dc Vgs 0.25 1.10 0.01
+.save I(Vds) I(Vsdp) V(ng)
+.end
