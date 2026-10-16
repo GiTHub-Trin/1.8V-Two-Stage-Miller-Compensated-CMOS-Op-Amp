@@ -12,7 +12,7 @@ A complete, specification-driven **1.8V Two-Stage Miller-Compensated CMOS Operat
 ## Key Performance Specifications
 
 | Performance Metric | Target Specification | Achieved Simulation Result (27°C) |
-| :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- |
 | **Open-Loop DC Gain ($A_{v0}$)** | $\ge 80.0\text{ dB}$ | **$81.2\text{ dB}$** ($11,450\text{ V/V}$) |
 | **Unity-Gain Bandwidth ($f_u$ / GBW)** | $\ge 25.0\text{ MHz}$ | **$30.0\text{ MHz}$** (driving $10\text{ pF}$) |
 | **Phase Margin (PM)** | $\ge 60.0^\circ$ | **$65.1^\circ$** (nominal) |
