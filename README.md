@@ -11,15 +11,15 @@ A complete, specification-driven **1.8V Two-Stage Miller-Compensated CMOS Operat
 
 ## Key Performance Specifications
 
-| Performance Metric | Target Specification | Achieved Simulation Result (27°C) | Status |
+| Performance Metric | Target Specification | Achieved Simulation Result (27°C) |
 | :--- | :--- | :--- | :--- |
-| **Open-Loop DC Gain ($A_{v0}$)** | $\ge 80.0\text{ dB}$ | **$81.2\text{ dB}$** ($11,450\text{ V/V}$) | <span style="color:green; font-weight:bold;">PASS</span> |
-| **Unity-Gain Bandwidth ($f_u$ / GBW)** | $\ge 25.0\text{ MHz}$ | **$30.0\text{ MHz}$** (driving $10\text{ pF}$) | <span style="color:green; font-weight:bold;">PASS</span> |
-| **Phase Margin (PM)** | $\ge 60.0^\circ$ | **$65.1^\circ$** (nominal) | <span style="color:green; font-weight:bold;">PASS</span> |
-| **Worst-Case Corner Phase Margin** | $\ge 55.0^\circ$ | **$58.4^\circ$** (at $125^\circ\text{C}$, Slow Corner) | <span style="color:green; font-weight:bold;">PASS</span> |
-| **Slew Rate (SR)** | $\ge 20.0\text{ V/}\mu\text{s}$ | **$23.3\text{ V/}\mu\text{s}$** (rising / falling) | <span style="color:green; font-weight:bold;">PASS</span> |
-| **$0.1\%$ Settling Time ($t_s$)** | $\le 80.0\text{ ns}$ | **$58.2\text{ ns}$** ($0.5\text{ V}$ step pulse) | <span style="color:green; font-weight:bold;">PASS</span> |
-| **Static Power Dissipation** | $\le 1.00\text{ mW}$ | **$0.86\text{ mW}$** (at $1.8\text{ V}$ supply) | <span style="color:green; font-weight:bold;">PASS</span> |
+| **Open-Loop DC Gain ($A_{v0}$)** | $\ge 80.0\text{ dB}$ | **$81.2\text{ dB}$** ($11,450\text{ V/V}$) |
+| **Unity-Gain Bandwidth ($f_u$ / GBW)** | $\ge 25.0\text{ MHz}$ | **$30.0\text{ MHz}$** (driving $10\text{ pF}$) |
+| **Phase Margin (PM)** | $\ge 60.0^\circ$ | **$65.1^\circ$** (nominal) |
+| **Worst-Case Corner Phase Margin** | $\ge 55.0^\circ$ | **$58.4^\circ$** (at $125^\circ\text{C}$, Slow Corner) |
+| **Slew Rate (SR)** | $\ge 20.0\text{ V/}\mu\text{s}$ | **$23.3\text{ V/}\mu\text{s}$** (rising / falling) |
+| **$0.1\%$ Settling Time ($t_s$)** | $\le 80.0\text{ ns}$ | **$58.2\text{ ns}$** ($0.5\text{ V}$ step pulse) |
+| **Static Power Dissipation** | $\le 1.00\text{ mW}$ | **$0.86\text{ mW}$** (at $1.8\text{ V}$ supply) |
 
 ---
 
